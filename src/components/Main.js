@@ -13,20 +13,24 @@ const Main = () => {
       if(response.ok) {
         const data = await response.json();
         setMovies(data.Search);
+        return data.Search;
       } else {
         console.log("something went wrong")
         return null;
       }
     }
 
-    useEffect(() => {
-        fetchMovies();
+    useEffect(async () => {
+      let response = await fetchMovies();
+      const data = await response.splice(0,5);
+      setMovies(data);
     }, [])
 
     return (
     <>
-        <Search search={search} setSearch={setSearch}/>
-        <button onClick={fetchMovies}>Search</button>
+        <Search setSearch={setSearch}/>
+        <br />
+        <button className="buttonSearch" onClick={fetchMovies}>Search</button>
         <Movies movies={movies}/> 
     </>
     )
