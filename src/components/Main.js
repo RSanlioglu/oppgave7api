@@ -21,7 +21,6 @@ const Main = () => {
 
     useEffect(() => {
         fetchMovies();
-        movies.splice(5, 5);
     }, [])
 
     return (
